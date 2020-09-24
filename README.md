@@ -9,7 +9,7 @@ a given mongodb collection.
 
 ### Setup a local version
 * create and activate a virtual environment by following [this](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
-* install the requirements in requirements.txt
+* install the requirements in ```requirements.txt```
 
 ### How to run 
 First, set the environment variables needed by the script to write the HTML string 
