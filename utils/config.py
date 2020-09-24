@@ -65,3 +65,11 @@ VARS_MAP = {
         'title': 'Total Tested'
     }
 }
+PERIOD_LABEL = {
+    'x': .99,
+    'y': .25,
+    'ha': 'right',
+    'va': 'center'
+}
+PCM_DATE_FMT = "%Y-%m-%dT%H:%M:%S"
+CHART_DATE_FMT = "%d %b"
