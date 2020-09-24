@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+# BCR2Mongo
 
-You can use the [editor on GitHub](https://github.com/fabriziomiano/barchartrace2mongo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## What is this?
+A simple script that reads the data from the [CPD dataset](https://github.com/pcm-dpc/COVID-19)
+and, for a given variable name, creates video-tagged HTML str that is dumped to 
+a given mongodb collection. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## How to use  
 
-### Markdown
+### Setup a local version
+* create and activate a virtual environment by following [this](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+* install the requirements in requirements.txt
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### How to run 
+First, set the environment variables needed by the script to write the HTML string 
+to the DB, that will be read by [COVIDashIT](https://github.com/fabriziomiano/covidashit): 
+`MONGO_URI`, `DB_NAME`, `COLLECTION_NAME`, by running in a new shell 
 
-```markdown
-Syntax highlighted code block
+```export <VAR_NAME>=<VAR_VALUE>```
 
-# Header 1
-## Header 2
-### Header 3
+e.g.
 
-- Bulleted
-- List
+```export DB_NAME=myCoolDB```
 
-1. Numbered
-2. List
+for the variables mentioned above. Then, in the same shell run 
 
-**Bold** and _Italic_ and `Code` text
+```python bcr2mongo.py --var <variable-name-as-per-DPC-dataset>```
 
-[Link](url) and ![Image](src)
-```
+e.g.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fabriziomiano/barchartrace2mongo/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```python bcr2mongo.py --var totale_positivi```
