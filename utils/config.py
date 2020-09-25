@@ -1,5 +1,16 @@
 import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
+ENV = os.getenv("ENV")
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("DB_NAME")
+if ENV is not None:
+    COLLECTION_NAME = os.getenv("COLLECTION_NAME") \
+        if 'prod' in ENV else os.getenv("COLLECTION_NAME-DEV")
+else:
+    COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 NATIONAL_DATA_FILE = "dpc-covid19-ita-andamento-nazionale.json"
 REGIONAL_DATA_FILE = "dpc-covid19-ita-regioni.json"
 PROVINCIAL_DATE_FILE = "dpc-covid19-ita-province.json"
@@ -12,9 +23,6 @@ URL_REGIONAL_DATA = os.path.join(BASE_URL_DATA, REGIONAL_DATA_FILE)
 URL_PROVINCIAL_DATA = os.path.join(BASE_URL_DATA, PROVINCIAL_DATE_FILE)
 PCM_DATE_KEY = "data"
 BARCHART_RACE_QUERY = {"name": ""}
-MONGO_URI = os.environ["MONGO_URI"]
-DB_NAME = os.environ["DB_NAME"]
-COLLECTION_NAME = os.environ["COLLECTION_NAME"]
 VARS_MAP = {
     'ricoverati_con_sintomi': {
         'title': 'Hospitalized With Symptoms'

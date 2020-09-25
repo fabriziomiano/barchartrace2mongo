@@ -15,3 +15,6 @@ dpc*.json
 
 # log files
 *.log
+
+# dotenv
+.env
