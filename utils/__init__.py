@@ -5,10 +5,11 @@ import logging
 import bar_chart_race as bcr
 import pandas as pd
 import requests
+from pymongo import errors
 
 from utils.config import (
     PCM_DATE_FMT, CHART_DATE_FMT, VARS_MAP, PERIOD_LABEL, URL_REGIONAL_DATA,
-    PCM_DATE_KEY, REGIONAL_DATA_FILE
+    PCM_DATE_KEY, REGIONAL_DATA_FILE, MONGO_URI
 )
 
 
@@ -31,6 +32,21 @@ def get_logger(name):
 
 UTILS_LOGGER = get_logger("Utils")
 UTILS_LOGGER.setLevel(logging.INFO)
+
+
+def mongo_connected(client):
+    """
+    Return True if mongo client is connected else False
+    :param client: pymongo.MongoClient
+    :return: bool
+    """
+    try:
+        client.server_info()
+        is_connected = True
+    except errors.ServerSelectionTimeoutError as e:
+        UTILS_LOGGER.error("{}".format(e))
+        is_connected = False
+    return is_connected
 
 
 def replace_video_tag_content(string_to_replace):

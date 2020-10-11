@@ -1,28 +1,23 @@
 import os
+
 from dotenv import load_dotenv
 
-
 load_dotenv()
-ENV = os.getenv("ENV")
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME")
-if ENV is not None:
-    COLLECTION_NAME = os.getenv("COLLECTION_NAME") \
-        if 'prod' in ENV else os.getenv("COLLECTION_NAME-DEV")
+ENV = os.getenv("ENV")
+if ENV == "prod":
+    COLLECTION_NAME = os.getenv("COLLECTION")
 else:
-    COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-NATIONAL_DATA_FILE = "dpc-covid19-ita-andamento-nazionale.json"
+    COLLECTION_NAME = os.getenv("COLLECTION_DEV")
 REGIONAL_DATA_FILE = "dpc-covid19-ita-regioni.json"
-PROVINCIAL_DATE_FILE = "dpc-covid19-ita-province.json"
 BASE_URL_DATA = (
     "https://raw.githubusercontent.com"
     "/pcm-dpc/COVID-19/master/dati-json/"
 )
-URL_NATIONAL_DATA = os.path.join(BASE_URL_DATA, NATIONAL_DATA_FILE)
 URL_REGIONAL_DATA = os.path.join(BASE_URL_DATA, REGIONAL_DATA_FILE)
-URL_PROVINCIAL_DATA = os.path.join(BASE_URL_DATA, PROVINCIAL_DATE_FILE)
 PCM_DATE_KEY = "data"
-BARCHART_RACE_QUERY = {"name": ""}
+BARCHART_DB_KEY = os.getenv("BARCHART_DB_KEY")
 VARS_MAP = {
     'ricoverati_con_sintomi': {
         'title': 'Hospitalized With Symptoms'
