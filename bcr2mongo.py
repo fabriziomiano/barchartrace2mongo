@@ -19,7 +19,7 @@ def barchartrace_to_mongo(var_to_bcr):
     """
     Create, or update, an item on mongodb like the following
     {
-        "name": "barchart_race",
+        "_id": "barchart_race",
         "ts": dt.datetime.now(),
         "html_str": "<video ....."
     }
@@ -29,12 +29,14 @@ def barchartrace_to_mongo(var_to_bcr):
     bcr_html = barchartrace_to_html(var_to_bcr)
     new_data = {
         "$set": {
-            "name": var_to_bcr,
+            BARCHART_DB_KEY: var_to_bcr,
             "html_str": bcr_html,
             "ts": dt.datetime.now()
         }
     }
-    main_logger.info("Writing to DB to collection {}".format(COLLECTION_NAME))
+    main_logger.info(
+        "Writing {} bcr to collection {}".format(var_to_bcr, COLLECTION_NAME)
+    )
     COLLECTION.update_one({BARCHART_DB_KEY: var_to_bcr}, new_data, upsert=True)
 
 
